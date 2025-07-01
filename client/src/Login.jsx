@@ -5,7 +5,19 @@ function Login(){
 
     return(
         <>
-            <h1>Hello</h1>
+            <div id="container">
+                <div id="credentials">
+                    <div id="usernameContainer">
+                        <label>Username:</label><input/>
+                    </div>
+                    <div id="passwordContainer">
+                        <label>Password:</label><input/>
+                    </div>
+                </div>
+                <div id="loginButton">
+                    <button>Login</button>
+                </div>
+            </div>
         </>
     )
 }
