@@ -28,10 +28,10 @@ body{
   padding: 1.5em;
 }
 
-#loginButton{
+#loginButtonLogin,#registerButtonRegister{
   align-self: flex-end;
   justify-self: flex-end;
-  padding-left: 1em;
+  padding-right: 1em;
   padding-bottom: 1em;
 }
 
@@ -45,12 +45,11 @@ body{
   border: 2px solid black;
   border-radius: 5px;
   background-color: rgb(223, 255, 244);
-
 }
 
-#registerButton{
+#registerButtonLogin,#loginButtonRegister{
   align-self: flex-start;
-  padding-right: 1em;
+  padding-left: 1em;
 
 }
 
@@ -61,4 +60,8 @@ body{
   align-items: space-between;
   margin-top: auto;
   width: 100%;
+}
+
+#title{
+  margin-bottom: 0;
 }
