@@ -31,8 +31,7 @@ body{
 #loginButton{
   align-self: flex-end;
   justify-self: flex-end;
-  margin-top:auto;
-  padding-right: 1em;
+  padding-left: 1em;
   padding-bottom: 1em;
 }
 
@@ -40,4 +39,26 @@ body{
   align-self: center;
   justify-self: center;
   margin-top: auto;
+}
+
+#usernameInput,#passwordInput{
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: rgb(223, 255, 244);
+
+}
+
+#registerButton{
+  align-self: flex-start;
+  padding-right: 1em;
+
+}
+
+#auth{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: space-between;
+  margin-top: auto;
+  width: 100%;
 }
