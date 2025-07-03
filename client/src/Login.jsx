@@ -1,12 +1,34 @@
-import { useNavigate } from "react-router-dom"
+import { useState } from "react";
+import { data, useNavigate } from "react-router-dom"
 
 
 function Login(){
+    const [username,setUsername] = useState("");
+    const [password,setPassword] = useState("");
     const navigate = useNavigate();
 
     function navigateToRegister(){
         navigate("./Register")
     }
+
+    const Login = async () =>{
+        try{
+            const response = await fetch("http://localhost:8080/submit",{
+                method:"POST",
+                headers:{
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({username,password}),
+            });
+            const result = await response.json();
+        }
+        catch(err){
+            console.log("Error sending data:",err);
+        }
+    }
+
+
+    
     return(
         <>
             <div id="container">
@@ -15,10 +37,10 @@ function Login(){
                 </div>
                 <div id="credentials">
                     <div id="usernameContainer">
-                        <label>Username:</label><input id="usernameInput"/>
+                        <label>Username:</label><input id="usernameInput" value={username} onChange={(e) =>setUsername(e.target.value)}/>
                     </div>
                     <div id="passwordContainer">
-                        <label>Password:</label><input id="passwordInput"/>
+                        <label>Password:</label><input id="passwordInput" value={password} onChange={(e) =>setPassword(e.target.value)}/>
                     </div>
                 </div>
                 <div id="auth">
@@ -26,7 +48,7 @@ function Login(){
                         <button onClick={navigateToRegister}>Register</button>
                     </div>
                     <div id="loginButtonLogin">
-                        <button>Login</button>
+                        <button onClick={Login}>Login</button>
                     </div>
                 </div>
             </div>
