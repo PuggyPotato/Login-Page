@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 
 
@@ -5,10 +6,28 @@ import { useNavigate } from "react-router-dom"
 
 
 function Register(){
+    const [name,setName] = useState("");
+    const [password,setPassword] = useState("");
     const navigate = useNavigate();
 
     function navigateToLogin(){
         navigate("/")
+    }
+
+    const Register = async () => {
+        try{
+            const response = await fetch("http://localhost:8080/register",{
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json",
+                },
+                body: JSON.stringify({name,password}),
+            });
+            const result = await JSON.response();
+        }
+        catch(err){
+            console.log("Error:",err);
+        }
     }
 
     return(
