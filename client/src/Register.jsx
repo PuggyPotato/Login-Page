@@ -23,7 +23,17 @@ function Register(){
                 },
                 body: JSON.stringify({name,password}),
             });
-            const result = await JSON.response();
+            if (!response.ok){
+                const errorText = await response.text();
+                console.error("Backend Error",errorText);
+                alert(errorText);
+                return;
+            }
+            
+            const result = await response.json();
+            console.log(result)
+
+            console.log("response:",response)
         }
         catch(err){
             console.log("Error:",err);
@@ -38,10 +48,10 @@ function Register(){
                 </div>
                 <div id="credentials">
                     <div id="usernameContainer">
-                        <label>Username:</label><input id="usernameInput"/>
+                        <label>Username:</label><input id="usernameInput" onChange={(e) =>setName(e.target.value)}/>
                     </div>
                     <div id="passwordContainer">
-                        <label>Password:</label><input id="passwordInput"/>
+                        <label>Password:</label><input id="passwordInput" onChange={(e) =>setPassword(e.target.value)}/>
                     </div>
                 </div>
                 <div id="auth">
@@ -49,7 +59,7 @@ function Register(){
                         <button onClick={navigateToLogin}>Login</button>
                     </div>
                     <div id="registerButtonRegister">
-                        <button>Register</button>
+                        <button onClick={Register}>Register</button>
                     </div>
                 </div>
             </div>
