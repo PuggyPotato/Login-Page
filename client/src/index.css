@@ -28,7 +28,7 @@ body{
   padding: 1.5em;
 }
 
-#loginButtonLogin,#registerButtonRegister{
+#loginButtonLoginDiv,#registerButtonRegisterDiv{
   align-self: flex-end;
   justify-self: flex-end;
   padding-right: 1em;
@@ -47,10 +47,9 @@ body{
   background-color: rgb(223, 255, 244);
 }
 
-#registerButtonLogin,#loginButtonRegister{
+#registerButtonLoginDiv,#loginButtonRegisterDiv{
   align-self: flex-start;
   padding-left: 1em;
-
 }
 
 #auth{
@@ -64,4 +63,19 @@ body{
 
 #title{
   margin-bottom: 0;
+}
+
+#usernameLabel,#passwordLabel{
+  font-size: large;
+}
+
+#registerButtonLogin,#loginButtonRegister{
+  border: none;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+#registerButtonLogin:hover,#loginButtonRegister:hover{
+  color: blue;
+  font: large;
 }

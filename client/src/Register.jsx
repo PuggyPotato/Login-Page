@@ -29,7 +29,7 @@ function Register(){
                 alert(errorText);
                 return;
             }
-            
+
             const result = await response.json();
             console.log(result)
 
@@ -48,18 +48,18 @@ function Register(){
                 </div>
                 <div id="credentials">
                     <div id="usernameContainer">
-                        <label>Username:</label><input id="usernameInput" onChange={(e) =>setName(e.target.value)}/>
+                        <label id="usernameLabel">Username:</label><input id="usernameInput" onChange={(e) =>setName(e.target.value)}/>
                     </div>
                     <div id="passwordContainer">
-                        <label>Password:</label><input id="passwordInput" onChange={(e) =>setPassword(e.target.value)}/>
+                        <label id="passwordLabel">Password:</label><input id="passwordInput" onChange={(e) =>setPassword(e.target.value)}/>
                     </div>
                 </div>
                 <div id="auth">
-                    <div id="loginButtonRegister">
-                        <button onClick={navigateToLogin}>Login</button>
+                    <div id="loginButtonRegisterDiv">
+                        <button onClick={navigateToLogin} id="loginButtonRegister">Back To Login</button>
                     </div>
-                    <div id="registerButtonRegister">
-                        <button onClick={Register}>Register</button>
+                    <div id="registerButtonRegisterDiv">
+                        <button onClick={Register} id="registerButtonRegister">Register</button>
                     </div>
                 </div>
             </div>

@@ -85,6 +85,44 @@ func handleRegister(w http.ResponseWriter,r *http.Request){
 }
 
 func handleLogin(w http.ResponseWriter,r *http.Request){
+	log.Println("handleLogin called")
+
+	if r.Method !=http.MethodPost{
+		http.Error(w,"BAD JSON",http.StatusMethodNotAllowed)
+		return
+	}
+
+	var user UserData
+	if err := json.NewDecoder(r.Body).Decode(&user);err !=nil{
+		http.Error(w,"Bad JSON",http.StatusBadRequest)
+		return
+	}
+
+	log.Println("Login attempt:",user)
+
+	var storedPassword string
+	query := "SELECT password FROM public.users WHERE name = $1"
+	err :=conn.QueryRow(context.Background(),query,user.Name).Scan(&storedPassword)
+
+	log.Printf("Raw input: Name='%s', Password='%s'", user.Name, user.Password)
+
+
+	if err != nil{
+		log.Println("Login DB error:",err)
+		http.Error(w,"Invalid username or password",http.StatusUnauthorized)
+		return
+	}
+
+	//Check If Password Match
+	if user.Password != storedPassword{
+		http.Error(w,"Invalid username or password",http.StatusUnauthorized)
+		return
+	}
+
+	//Success
+	response :=map[string]string{"message":"Login Succesful"}
+	w.Header().Set("Content-Type","application/json")
+	json.NewEncoder(w).Encode(response)
 
 }
 
@@ -102,6 +140,7 @@ func main(){
 
 	//Routes
 	http.HandleFunc("/register",withCORS(handleRegister))
+	http.HandleFunc("/login",withCORS(handleLogin))
 
 	//Start Http Server
 	log.Fatal(http.ListenAndServe(":8080",nil))

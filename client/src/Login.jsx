@@ -3,7 +3,7 @@ import { data, useNavigate } from "react-router-dom"
 
 
 function Login(){
-    const [username,setUsername] = useState("");
+    const [name,setName] = useState("");
     const [password,setPassword] = useState("");
     const navigate = useNavigate();
 
@@ -13,14 +13,22 @@ function Login(){
 
     const Login = async () =>{
         try{
-            const response = await fetch("http://localhost:8080/submit",{
+            const response = await fetch("http://localhost:8080/login",{
                 method:"POST",
                 headers:{
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({username,password}),
+                body: JSON.stringify({name,password}),
             });
+            if (!response.ok){
+                const errorText = await response.text();
+                console.error("Backend Error",errorText);
+                alert(errorText);
+                return;
+            }
             const result = await response.json();
+            console.log(result)
+            navigate("./Home")
         }
         catch(err){
             console.log("Error sending data:",err);
@@ -37,18 +45,18 @@ function Login(){
                 </div>
                 <div id="credentials">
                     <div id="usernameContainer">
-                        <label>Username:</label><input id="usernameInput" value={username} onChange={(e) =>setUsername(e.target.value)}/>
+                        <label id="usernameLabel">Username:</label><input id="usernameInput" value={name} onChange={(e) =>setName(e.target.value)}/>
                     </div>
                     <div id="passwordContainer">
-                        <label>Password:</label><input id="passwordInput" value={password} onChange={(e) =>setPassword(e.target.value)}/>
+                        <label id="passwordLabel">Password:</label><input id="passwordInput" value={password} onChange={(e) =>setPassword(e.target.value)}/>
                     </div>
                 </div>
                 <div id="auth">
-                    <div id="registerButtonLogin">
-                        <button onClick={navigateToRegister}>Register</button>
+                    <div id="registerButtonLoginDiv">
+                        <button onClick={navigateToRegister} id="registerButtonLogin">Back To Register</button>
                     </div>
-                    <div id="loginButtonLogin">
-                        <button onClick={Login}>Login</button>
+                    <div id="loginButtonLoginDiv">
+                        <button onClick={Login} id="loginButtonLogin">Login</button>
                     </div>
                 </div>
             </div>
